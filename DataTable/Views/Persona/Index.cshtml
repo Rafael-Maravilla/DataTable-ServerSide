@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<table id="table-data">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Edad</td>
+        </tr>
+    </thead>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function(){
+            $("#table-data").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "@Url.Content("~/Persona/obtenerDatos")",
+                    "type": "POST",
+                    "dataType": "json"
+                },
+                "pageLength": 10,
+                "filter": true,
+                "responsivePriority": 1,
+                "data": null,
+                "columns": [
+                    {data: "id", name: "Identificador", "autoWidth": true},
+                    {data: "nombre", name: "Nombre", "autoWidth": true},
+                    {data: "edad", name: "Edad", "autoWidth": true}
+                ]
+            });
+
+        });
+
+    </script>
+}
